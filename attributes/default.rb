@@ -28,7 +28,7 @@ default['rsyslog']['server_search']             = 'role:loghost'
 default['rsyslog']['remote_logs']               = true
 default['rsyslog']['per_host_dir']              = '%$YEAR%/%$MONTH%/%$DAY%/%HOSTNAME%'
 default['rsyslog']['max_message_size']          = '2k'
-default['rsyslog']['preserve_fqdn']             = 'off'
+default['rsyslog']['preserve_fqdn']             = 'on'
 default['rsyslog']['high_precision_timestamps'] = false
 default['rsyslog']['repeated_msg_reduction']    = 'on'
 default['rsyslog']['logs_to_forward']           = '*.*'
@@ -104,7 +104,5 @@ else
     'news.notice' => "-#{node['rsyslog']['default_log_dir']}/news/news.notice",
     '*.=debug;auth,authpriv.none;news.none;mail.none' => "-#{node['rsyslog']['default_log_dir']}/debug",
     '*.=info;*.=notice;*.=warn;auth,authpriv.none;cron,daemon.none;mail,news.none' => "-#{node['rsyslog']['default_log_dir']}/messages",
-    '*.emerg' => '*',
-    'daemon.*;mail.*;news.err;*.=debug;*.=info;*.=notice;*.=warn' => '|/dev/xconsole'
   }
 end
