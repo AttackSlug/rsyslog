@@ -16,8 +16,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+apt_repository "rsyslog" do
+  uri "http://ppa.launchpad.net/adiscon/v7-stable/ubuntu"
+  distribution node['lsb']['codename']
+  components ["main"]
+  keyserver "keyserver.ubuntu.com"
+  key "5234BF2B"
+end
 
-package 'rsyslog'
+package "rsyslog" do
+  action :upgrade
+end
+
 package 'rsyslog-relp' if node['rsyslog']['use_relp']
 
 if node['rsyslog']['enable_tls'] && node['rsyslog']['tls_ca_file']
